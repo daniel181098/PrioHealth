@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTPCIT - Admin</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #4CAF50, #81C784);
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            color: #316e33;
+            margin-bottom: 20px;
+        }
+        .login-container, .account-container, .users-list {
+            display: none;
+        }
+        .logout-button {
+            margin-top: 20px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="login-container" id="loginContainer">
+        <a href="index.html" class="text-center" style="text-decoration: none;">
+            <h2>Iniciar Sesión</h2>
+        </a>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Nombre de Usuario:</label>
+                <input type="text" class="form-control" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" class="form-control" id="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+            <div class="alert alert-danger mt-3" id="errorMessage" style="display:none;">Credenciales incorrectas.</div>
+        </form>
+    </div>
+
+    <div class="account-container" id="accountContainer" style="display:none;">
+        <h2 class="text-center">Mi Cuenta</h2>
+        <form id="accountForm">
+            <div class="form-group">
+                <label for="accountUsername">Nombre de Usuario:</label>
+                <input type="text" class="form-control" id="accountUsername" required>
+            </div>
+            <div class="form-group">
+                <label for="accountEmail">Correo Electrónico:</label>
+                <input type="email" class="form-control" id="accountEmail" required>
+            </div>
+            <button type="submit" class="btn btn-success btn-block">Actualizar</button>
+        </form>
+        <button class="btn btn-danger logout-button" id="logoutButton">Cerrar Sesión</button>
+    </div>
+
+    <div class="users-list" id="usersList" style="display:none;">
+        <h2 class="text-center">Usuarios Registrados</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Nombre de Usuario</th>
+                    <th>Correo Electrónico</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="usersTable">
+                <!-- Los usuarios se agregarán aquí -->
+            </tbody>
+        </table>
+        <button class="btn btn-danger logout-button" id="logoutButtonUsers">Cerrar Sesión</button>
+    </div>
+</div>
+<div class="footer">
+    <p>&copy; 2024 Priohealth. Todos los derechos reservados.</p>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $(document).ready(function() {
+        const validUser = { username: "Daniel", password: "Daniel1810" }; // En producción, esto debería ser un hash
+        let currentUserIndex;
+
+        // Mostrar el formulario de inicio de sesión
+        $('#loginContainer').show();
+
+        // Intentos de inicio de sesión
+        let loginAttempts = 0;
+
+        // Manejo de inicio de sesión
+        $('#loginForm').on('submit', function(event) {
+            event.preventDefault();
+            const username = $('#username').val();
+            const password = $('#password').val();
+
+            if (loginAttempts >= 3) {
+                $('#errorMessage').text('Demasiados intentos fallidos. Por favor, inténtalo más tarde.').fadeIn().delay(3000).fadeOut();
+                return;
+            }
+
+            if (username === validUser.username && password === validUser.password) {
+                $('#loginContainer').hide();
+                $('#usersList').show();
+                loadUsers(); // Cargar usuarios después de iniciar sesión
+                loginAttempts = 0; // Reiniciar intentos al iniciar sesión exitosamente
+            } else {
+                loginAttempts++;
+                $('#errorMessage').fadeIn().delay(3000).fadeOut();
+            }
+        });
+
+        // Función para cargar usuarios
+        function loadUsers() {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            $('#usersTable').empty(); // Limpiar la tabla antes de cargar usuarios
+            users.forEach((user, index) => {
+                $('#usersTable').append(`
+                    <tr>
+                        <td>${user.username}</td>
+                        <td>${user.email}</td>
+                        <td>
+                            <button class="btn btn-info edit-user" data-index="${index}">Editar</button>
+                            <button class="btn btn-danger delete-user" data-index="${index}">Eliminar</button>
+                        </td>
+                    </tr>
+                `);
+            });
+        }
+
+        // Manejo de la eliminación de usuarios
+        $(document).on('click', '.delete-user', function() {
+            const index = $(this).data('index');
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "No podrás deshacer esto.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminarlo!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const users = JSON.parse(localStorage.getItem('users')) || [];
+                    users.splice(index, 1);
+                    localStorage.setItem('users', JSON.stringify(users));
+                    Swal.fire('Eliminado!', 'El usuario ha sido eliminado.', 'success');
+                    loadUsers(); // Recargar la lista de usuarios
+                }
+            });
+        });
+
+        // Manejo de la edición de usuarios
+        $(document).on('click', '.edit-user', function() {
+            const index = $(this).data('index');
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            currentUserIndex = index;
+            $('#accountUsername').val(users[index].username);
+            $('#accountEmail').val(users[index].email);
+            $('#usersList').hide();
+            $('#accountContainer').show();
+        });
+
+        // Manejar la actualización del formulario
+        $('#accountForm').on('submit', function(event) {
+            event.preventDefault();
+            const newUsername = $('#accountUsername').val();
+            const newEmail = $('#accountEmail').val();
+
+            // Actualizar el usuario en el arreglo
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            users[currentUserIndex] = { username: newUsername, email: newEmail };
+
+            // Guardar los usuarios actualizados en localStorage
+            localStorage.setItem('users', JSON.stringify(users));
+
+            // Mostrar mensaje de éxito con SweetAlert
+            Swal.fire({
+                title: '¡Actualizado!',
+                text: 'Tu cuenta ha sido actualizada.',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            });
+
+            // Actualizar la lista de usuarios en la página de administración
+            loadUsers(); // Recargar la lista de usuarios
+            $('#accountContainer').hide();
+            $('#usersList').show(); // Volver a mostrar la lista de usuarios
+        });
+
+        // Manejo de cerrar sesión
+        $('#logoutButton, #logoutButtonUsers').on('click', function() {
+            $('#usersList').hide();
+            $('#accountContainer').hide();
+            $('#loginContainer').show();
+            $('#usersTable').empty(); // Limpiar la tabla de usuarios
+            $('#username').val(''); // Limpiar el campo de nombre de usuario
+            $('#password').val(''); // Limpiar el campo de contraseña
+        });
+    });
+</script>
+
+</body>
+</html>

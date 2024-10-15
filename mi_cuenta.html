@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cuenta - CTPCIT</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #81C784, #4CAF50);
+            font-family: Arial, sans-serif;
+            color: #fff;
+        }
+        .navbar {
+            background-color: #4CAF50;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        .details {
+            margin-top: 20px;
+            background: rgba(32, 66, 55, 0.597);
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .details p {
+            font-size: 1.2em;
+        }
+        .btn-logout {
+            margin-top: 20px;
+            background-color: #f44336; /* Color rojo para el botón de cerrar sesión */
+        }
+        .btn-logout:hover {
+            background-color: #d32f2f; /* Color más oscuro al pasar el mouse */
+        }
+        .edit-icon {
+            cursor: pointer;
+            margin-left: 5px;
+            color: #493737;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+        }
+        .modal-content {
+            background-color: #ffffff; /* Color de fondo blanco para el modal */
+            color: #000; /* Color de texto negro */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="menu.html">
+            <img src="imgs/Logo Priohealth.jpg" alt="Logo" width="100" height="100" class="d-inline-block align-right">
+            CTPCIT
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="menu.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="mi_cuenta.html">Mi Cuenta</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="agendar_citas.html">Agendar Citas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="consultar_citas.html">Consultar Citas</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="text-center">Bienvenido a tu cuenta</h1>
+        <div class="details">
+            <h3>Detalles de tu cuenta</h3>
+            <p>Nombre de usuario: <span id="username"></span>
+                <i class="fas fa-pencil-alt edit-icon" data-toggle="modal" data-target="#editUsernameModal"></i>
+            </p>
+            <p>Correo electrónico: <span id="email"></span>
+                <i class="fas fa-pencil-alt edit-icon" data-toggle="modal" data-target="#editEmailModal"></i>
+            </p>
+            <p>Contraseña: <span id="passwordDisplay">********</span>
+                <i class="fas fa-pencil-alt edit-icon" data-toggle="modal" data-target="#editPasswordModal"></i>
+            </p>
+        </div>
+        <button class="btn btn-logout btn-block" id="logoutButton">Cerrar Sesión</button>
+    </div>
+
+    <!-- Modal para editar nombre de usuario -->
+    <div class="modal fade" id="editUsernameModal" tabindex="-1" role="dialog" aria-labelledby="editUsernameModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUsernameModalLabel">Editar Nombre de Usuario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editUsernameForm">
+                        <div class="form-group">
+                            <label for="newUsername">Ingresa un nuevo nombre de usuario:</label>
+                            <input type="text" class="form-control" id="newUsername" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="submitEditUsername">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para editar correo electrónico -->
+    <div class="modal fade" id="editEmailModal" tabindex="-1" role="dialog" aria-labelledby="editEmailModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editEmailModalLabel">Editar Correo Electrónico</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editEmailForm">
+                        <div class="form-group">
+                            <label for="newEmail">Ingresa un nuevo correo electrónico:</label>
+                            <input type="email" class="form-control" id="newEmail" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="submitEditEmail">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para editar contraseña -->
+    <div class="modal fade" id="editPasswordModal" tabindex="-1" role="dialog" aria-labelledby="editPasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editPasswordModalLabel">Editar Contraseña</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editPasswordForm">
+                        <div class="form-group">
+                            <label for="newPassword">Ingresa una nueva contraseña:</label>
+                            <input type="password" class="form-control" id="newPassword" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="submitEditPassword">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 Priohealth. Todos los derechos reservados.</p>
+    </div>
+    
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Obtener el usuario actualmente logueado
+            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+            
+            if (loggedInUser) {
+                $('#username').text(loggedInUser.username);
+                $('#email').text(loggedInUser.email);
+            } else {
+                $('#username').text('No estás logueado.');
+                $('#email').text('');
+            }
+
+            // Evento para cerrar sesión
+            $('#logoutButton').on('click', function() {
+                localStorage.removeItem('loggedInUser'); // Eliminar el usuario logueado
+                window.location.href = 'index.html'; // Redirigir al inicio de sesión
+            });
+
+            // Cambiar nombre de usuario
+            $('#submitEditUsername').on('click', function() {
+                const newUsername = $('#newUsername').val().trim();
+                if (newUsername) {
+                    loggedInUser.username = newUsername;
+                    localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+                    $('#username').text(newUsername);
+                    $('#newUsername').val(''); // Limpiar el campo
+                    $('#editUsernameModal').modal('hide');
+                    swal("¡Éxito!", "El nombre de usuario ha sido cambiado.", "success");
+                } else {
+                    swal("Error", "Por favor, ingresa un nombre de usuario válido.", "error");
+                }
+            });
+
+            // Cambiar correo electrónico
+            $('#submitEditEmail').on('click', function() {
+                const newEmail = $('#newEmail').val().trim();
+                if (newEmail) {
+                    loggedInUser.email = newEmail;
+                    localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+                    $('#email').text(newEmail);
+                    $('#newEmail').val(''); // Limpiar el campo
+                    $('#editEmailModal').modal('hide');
+                    swal("¡Éxito!", "El correo electrónico ha sido cambiado.", "success");
+                } else {
+                    swal("Error", "Por favor, ingresa un correo electrónico válido.", "error");
+                }
+            });
+
+            // Cambiar contraseña
+            $('#submitEditPassword').on('click', function() {
+                const newPassword = $('#newPassword').val().trim();
+                if (newPassword) {
+                    loggedInUser.password = newPassword; // Asumir que guardas la contraseña también
+                    localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+                    $('#passwordDisplay').text('********'); // Mantener la visualización como oculta
+                    $('#newPassword').val(''); // Limpiar el campo
+                    $('#editPasswordModal').modal('hide');
+                    swal("¡Éxito!", "La contraseña ha sido cambiada.", "success");
+                } else {
+                    swal("Error", "Por favor, ingresa una contraseña válida.", "error");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Principal - Priohealth</title>
+    <!-- Google Fonts for modern typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e9f5e9;
+            font-family: 'Poppins', sans-serif; /* New font */
+        }
+
+        .hero {
+            background: linear-gradient(45deg, #4CAF50, #81C784); /* Softer gradient */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .navbar-custom {
+            background: linear-gradient(to right, #4CAF50, #66BB6A); /* Fondo del menú verde */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-custom .navbar-nav .nav-link {
+            color: black; /* Color del texto negro */
+            transition: color 0.3s ease;
+        }
+
+        .navbar-custom .navbar-brand {
+            color: #0e0e0e; /* Color de la marca del sitio */
+        }
+
+        .navbar-custom .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* Hover color */
+            color: white;
+        }
+
+        .navbar-custom .nav-item.active .nav-link {
+            background-color: #45a049; /* Active link background */
+        }
+
+        .navbar-custom .dropdown-menu {
+            background-color: #4CAF50; /* Dropdown background */
+        }
+        
+        .navbar-custom .dropdown-item {
+            color: white;
+        }
+
+        .navbar-custom .dropdown-item:hover {
+            background-color: #45a049;
+        }
+
+        .navbar-custom .fas {
+            color: black; /* Icon color */
+            transition: color 0.3s ease;
+        }
+
+        .navbar-custom .fas:hover {
+            color: white; /* Hover color for icon */
+        }
+
+        .navbar-toggler {
+            border: none;
+        }
+
+        /* Toggle icon styling */
+        .navbar-toggler-icon {
+            background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"%3E%3Cpath stroke="white" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E');
+        }
+
+        /* Card styling */
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px); /* Lift on hover */
+        }
+
+        .btn-lg:hover {
+            background-color: #66bb6a;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transform: scale(1.05);
+            transition: all 0.3s ease;
+        }
+
+        .footer {
+            color: #000000;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <a class="navbar-brand" href="menu.html">
+        <img src="imgs/Logo Priohealth.jpg" alt="Logo" width="100" height="100" class="d-inline-block align-right">
+        CTPCIT
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="menu.html">Menú Principal</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="consultar_citas.html">Consultar Citas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="agendar_citas.html">Agendar Citas</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user"></i> Mi Cuenta
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="mi_cuenta.html">Perfil</a>
+                    <a class="dropdown-item" href="index.html">Cerrar Sesión</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<div class="hero">
+    <h1>Bienvenido a CTPCIT</h1>
+</div>
+
+<!-- Services Section -->
+<div class="container mt-5">
+    <h2 class="text-center">Servicios Destacados</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="https://th.bing.com/th/id/OIP.mqDTB9Z3y82EnhA9SUvi-AHaEK?rs=1&pid=ImgDetMain" class="card-img-top" alt="Servicio 1">
+                <div class="card-body">
+                    <h5 class="card-title">Consulta Médica</h5>
+                    <p class="card-text">Atención médica personalizada para resolver tus problemas de salud puedes consultarle a la enfermera lo que necesites.</p>
+                    <a href="#" class="btn btn-primary">Más Información</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="https://medicasurmexico.com/images/services/urgencias.jpg" class="card-img-top" alt="Servicio 2">
+                <div class="card-body">
+                    <h5 class="card-title">Urgencias</h5>
+                    <p class="card-text">Atención inmediata para situaciones críticas.</p>
+                    <a href="#" class="btn btn-primary">Más Información</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="https://www.clikisalud.net/wp-content/uploads/2016/08/ex%C3%A1menes-sangu%C3%ADneos.jpg" class="card-img-top" alt="Servicio 3">
+                <div class="card-body">
+                    <h5 class="card-title">Exámenes de Salud</h5>
+                    <p class="card-text">Realizamos exámenes de laboratorio y diagnóstico.</p>
+                    <a href="#" class="btn btn-primary">Más Información</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Testimonials Section -->
+<div class="container mt-5">
+    <h2 class="text-center">Testimonios</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-center mb-4">
+                <div class="card-body">
+                    <p class="card-text">"La atención fue excelente, me sentí muy cuidado en todo momento!"</p>
+                    <footer class="blockquote-footer">Paciente 1</footer>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center mb-4">
+                <div class="card-body">
+                    <p class="card-text">"Con esta web podemos agendar citas de una manera muy sencilla y interactiva."</p>
+                    <footer class="blockquote-footer">Paciente 2</footer>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center mb-4">
+                <div class="card-body">
+                    <p class="card-text">"Gracias a esta web, recibí la atención que necesitaba."</p>
+                    <footer class="blockquote-footer">Paciente3</footer>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Botón para abrir el modal de FAQ -->
+<div class="text-center mt-5">
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#faqModal">
+        Preguntas Frecuentes (FAQ)
+    </button>
+</div>
+
+<!-- Modal de Preguntas Frecuentes -->
+<div class="modal fade" id="faqModal" tabindex="-1" aria-labelledby="faqModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="faqModalLabel">Preguntas Frecuentes (FAQ)</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="accordion" id="faqAccordion">
+                    <div class="card">
+                        <div class="card-header" id="faqHeadingOne">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#faqCollapseOne" aria-expanded="true" aria-controls="faqCollapseOne">
+                                    ¿Cómo agendo una cita?
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="faqCollapseOne" class="collapse" aria-labelledby="faqHeadingOne" data-parent="#faqAccordion">
+                            <div class="card-body">
+                                Para agendar una cita, dirígete a la sección de "Agendar Citas" y completa el formulario con tus datos.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="faqHeadingTwo">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#faqCollapseTwo" aria-expanded="false" aria-controls="faqCollapseTwo">
+                                    ¿Qué debo llevar a mi cita?
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="faqCollapseTwo" class="collapse" aria-labelledby="faqHeadingTwo" data-parent="#faqAccordion">
+                            <div class="card-body">
+                                Es recomendable llevar tu documento de identificación y cualquier información médica relevante.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="faqHeadingThree">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#faqCollapseThree" aria-expanded="false" aria-controls="faqCollapseThree">
+                                    ¿Puedo cancelar o reprogramar mi cita?
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="faqCollapseThree" class="collapse" aria-labelledby="faqHeadingThree" data-parent="#faqAccordion">
+                            <div class="card-body">
+                                Sí, puedes cancelar o reprogramar tu cita a través de la sección "Consultar Citas".
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer -->
+<div class="footer mt-5">
+    <p>&copy; 2024 PrioHealth - Todos los derechos reservados.</p>
+</div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+

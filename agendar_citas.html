@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda de Citas - Priohealth </title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        body {
+            background-color: #e9f5e9;
+            color: #333;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+        }
+        .hero {
+            background: #4CAF50;
+            height: 50vh;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+        .hero h1 {
+            font-size: 3em;
+        }
+        .form-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-top: -50px;
+        }
+        .btn-primary {
+            background-color: #4CAF50;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #45a049;
+        }
+        .urgency-message {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .priority-box {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        .alert {
+            display: none;
+        }
+        .navbar {
+            background: linear-gradient(to right, #4CAF50, #66BB6A);
+            box-shadow: 0 4px 10px rgba(95, 72, 72, 0.2);
+        }
+        
+        .navbar-nav .nav-link {
+            padding: 10px 15px;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="menu.html">
+        <img src="imgs/Logo Priohealth.jpg" alt="Logo" width="100" height="100" class="d-inline-block align-right">
+        CTPCIT
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="menu.html">Menú Principal</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="consultar_citas.html">Consultar Citas</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user"></i> Mi Cuenta
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="mi_cuenta.html">Perfil</a>
+                    <a class="dropdown-item" href="index.html">Cerrar Sesión</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="hero">
+    <h1>Agenda tu Cita Médica</h1>
+</div>
+
+<div class="container mt-5">
+    <div class="form-container">
+        <h2 class="text-center">Solicita tu Cita</h2>
+        <div class="alert alert-success" id="successMessage">Cita agendada con éxito!</div>
+        <div class="alert alert-danger" id="errorMessage">Error al agendar la cita. Por favor, inténtalo de nuevo.</div>
+        <form id="appointmentForm">
+            <div class="form-group">
+                <label for="name">Nombre:</label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Edad:</label>
+                <input type="number" class="form-control" id="age" required min="1">
+            </div>
+            <div class="form-group">
+                <label for="urgency">Selecciona tu Urgencia:</label>
+                <div class="d-flex align-items-center">
+                    <select class="form-control" id="urgency" required>
+                        <option value="">Selecciona una opción</option>
+                        <option value="quebradura_mano">Quebradura de mano</option>
+                        <option value="quebradura_pierna">Quebradura de pierna</option>
+                        <option value="esguince_tobillo">Esguince de tobillo</option>
+                        <option value="corte_profundo">Corte profundo</option>
+                        <option value="herida_cabeza">Herida en la cabeza</option>
+                        <option value="gripe">Gripe</option>
+                        <option value="fiebre">Fiebre alta</option>
+                        <option value="dolor_estomago">Dolor de estómago</option>
+                        <option value="reaccion_alergica">Reacción alérgica</option>
+                        <option value="dificultad_respirar">Dificultad para respirar</option>
+                        <option value="dolor_pecho">Dolor en el pecho</option>
+                        <option value="desmayo">Desmayo</option>
+                        <option value="infeccion">Infección</option>
+                        <option value="convulsiones">Convulsiones</option>
+                        <option value="quemadura_leve">Quemadura leve</option>
+                        <option value="vomitos">Vómitos persistentes</option>
+                        <option value="diabetes">Diabetes (bajo nivel de azúcar)</option>
+                        <option value="dolor_muelas">Dolor de muelas</option>
+                        <option value="intoxicacion_alimentaria">Intoxicación alimentaria</option>
+                        <option value="faringitis">Faringitis estreptocócica</option>
+                        <option value="torcedura">Torcedura</option>
+                        <option value="cansancio_extremo">Cansancio extremo</option>
+                        <option value="fractura_clavicula">Fractura de clavícula</option>
+                        <option value="mareos">Mareos o vértigo</option>
+                        <option value="problemas_oculares">Problemas oculares</option>
+                        <option value="infeccion_cutanea">Infección cutánea</option>
+                        <option value="dolor_muscular">Dolor muscular intenso</option>
+                        <option value="problemas_audicion">Problemas de audición repentina</option>
+                        <option value="hablar_enfermera">Hablar con la enfermera</option>
+                        <option value="otra_urgencia">Otra (describir)</option>
+                    </select>
+                    <div class="priority-box" id="priorityBox"></div>
+                </div>
+                <div class="urgency-message" id="urgencyMessage"></div>
+            </div>
+            <div class="form-group" id="customUrgency" style="display: none;">
+                <label for="customUrgencyInput">Describe tu urgencia:</label>
+                <textarea class="form-control" id="customUrgencyInput" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="date">Fecha y Hora:</label>
+                <input type="datetime-local" class="form-control" id="date" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Agendar Cita</button>
+        </form>
+    </div>
+</div>
+<div class="footer">
+    <p>&copy; 2024 Priohealth. Todos los derechos reservados.</p>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    let appointments = []; // Array para almacenar las citas
+
+    $(document).ready(function() {
+        $('#urgency').on('change', function() {
+            let urgencyValue = $(this).val();
+            if (urgencyValue === 'otra_urgencia') {
+                $('#customUrgency').show();
+            } else {
+                $('#customUrgency').hide();
+                $('#customUrgencyInput').val('');
+            }
+            updatePriorityBox(urgencyValue);
+            $('#urgencyMessage').text(getUrgencyMessage(urgencyValue));
+        });
+
+        function getUrgencyMessage(urgencyValue) {
+            switch (urgencyValue) {
+                case 'quebradura_mano':
+                case 'quebradura_pierna':
+                case 'esguince_tobillo':
+                    return '¡Atención médica inmediata necesaria!';
+                case 'gripe':
+                case 'fiebre':
+                    return 'Por favor, mantente hidratado y descansa.';
+                case 'dolor_estomago':
+                case 'infeccion':
+                    return 'Considera consultar con un médico pronto.';
+                default:
+                    return '';
+            }
+        }
+
+        function updatePriorityBox(urgencyValue) {
+            const colors = {
+                'quebradura_mano': 'red',
+                'quebradura_pierna': 'red',
+                'esguince_tobillo': 'orange',
+                'corte_profundo': 'red',
+                'herida_cabeza': 'red',
+                'gripe': 'yellow',
+                'fiebre': 'yellow',
+                'dolor_estomago': 'orange',
+                'reaccion_alergica': 'red',
+                'dificultad_respirar': 'red',
+                'dolor_pecho': 'red',
+                'desmayo': 'red',
+                'convulsiones': 'red',
+                'quemadura_leve': 'yellow',
+                'vomitos': 'orange',
+                'diabetes': 'red',
+                'dolor_muelas': 'orange',
+                'intoxicacion_alimentaria': 'red',
+                'faringitis': 'orange',
+                'torcedura': 'orange',
+                'cansancio_extremo': 'orange',
+                'fractura_clavicula': 'red',
+                'mareos': 'orange',
+                'problemas_oculares': 'orange',
+                'infeccion_cutanea': 'orange',
+                'dolor_muscular': 'orange',
+                'problemas_audicion': 'orange',
+                'hablar_enfermera': 'green',
+                'otra_urgencia': 'gray'
+            };
+
+            $('#priorityBox').css('background-color', colors[urgencyValue] || 'gray');
+        }
+
+        $('#appointmentForm').on('submit', function(event) {
+            event.preventDefault();
+            const name = $('#name').val();
+            const age = $('#age').val();
+            const urgency = $('#urgency').val();
+            const customUrgency = $('#customUrgencyInput').val();
+            const date = $('#date').val();
+
+            const selectedUrgency = urgency === 'otra_urgencia' ? customUrgency : urgency;
+
+            
+            if (name && age && selectedUrgency && date) {
+                // Guardar en localStorage
+                let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+                appointments.push({ name, age, urgency: selectedUrgency, date });
+                localStorage.setItem('appointments', JSON.stringify(appointments));
+
+                $('#successMessage').show().delay(3000).fadeOut();
+                $('#appointmentForm')[0].reset(); // Resetear el formulario
+            } else {
+                $('#errorMessage').show().delay(3000).fadeOut();
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
