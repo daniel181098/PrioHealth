@@ -74,15 +74,23 @@
             background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"%3E%3Cpath stroke="white" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E');
         }
 
-        /* Card styling */
         .card {
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column; /* Asegura que el contenido se apile verticalmente */
+            height: 100%; /* Asegura que todas las tarjetas tengan la misma altura */
         }
 
         .card:hover {
             transform: translateY(-5px); /* Lift on hover */
+        }
+
+        /* Imagenes de las tarjetas */
+        .card-img-top {
+            height: 200px; /* Establece una altura fija */
+            object-fit: cover; /* Mantiene la relación de aspecto de la imagen */
         }
 
         .btn-lg:hover {
@@ -294,5 +302,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
-</html>
+</html>  
 
